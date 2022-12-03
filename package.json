@@ -1,0 +1,34 @@
+{
+  "name": "instatdito-be",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node --require dotenv/config ./bin/www",
+    "devstart": "nodemon --require dotenv/config ./bin/www",
+    "serverstart": "SET DEBUG=instatdito-be:* npm run devstart"
+  },
+  "dependencies": {
+    "array-shuffle": "^1.0.1",
+    "cloudinary": "^1.22.0",
+    "cookie-parser": "~1.4.4",
+    "cors": "^2.8.5",
+    "corser": "^2.0.1",
+    "debug": "~2.6.9",
+    "dotenv": "^8.2.0",
+    "ejs": "~2.6.1",
+    "express": "~4.16.1",
+    "express-session": "^1.17.1",
+    "firebase": "^7.15.5",
+    "firebase-admin": "^8.12.1",
+    "gmail-api-create-message-body": "^1.0.0",
+    "gmail-send": "^1.8.10",
+    "googleapis": "^52.1.0",
+    "googlephotos": "^0.2.5",
+    "http-errors": "~1.6.3",
+    "morgan": "~1.9.1",
+    "puppeteer": "^4.0.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.4"
+  }
+}
