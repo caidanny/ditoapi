@@ -1,6 +1,3 @@
-const createUser = require('../controller/ct-authentication');
-const checkIfAuthenticated = require('../middleware/md-authentication');
-const puppeteer = require('puppeteer');
 const { google } = require('googleapis');
 const Photos = require('googlephotos')
 var express = require('express');
@@ -85,64 +82,5 @@ const getImgUrls = async (authCode) => {
         selectedImgUrls.push(shuffleImgUrls[i]);
     }
     return selectedImgUrls;
-}
-
-
-const doScreenCapture = async (dateTime) => {
-    try {
-        const browser = await puppeteer.launch();
-        const page = await browser.newPage();
-        await page.goto(process.env.LOGIN_URL, { waitUntil: 'domcontentloaded' });
-        await page.type('[name="email"]', process.env.DITO_USER);
-        await page.type('[name="password"]', process.env.DITO_PASSWORD);
-        await page.click('#btnLogin');
-        // await page.waitFor(3000)
-        // await page.screenshot({
-        //     path: "./Tscreenshot.jpg",
-        //     type: "jpeg",
-        //     fullPage: true
-        //   });
-        await page.waitForSelector('#btnSetTeam');
-        const divTeam = await page.$('#team')
-        await page.waitFor(1000);
-
-        let shotResult = await divTeam.screenshot().then((result) => {
-            console.log('Screenshot OK');
-            return result;
-        }).catch(e => {
-            console.error('Error in shooting screen', e);
-            return false;
-        });
-        await browser.close();
-
-        const cloudinary_options = {
-            public_id: 'match_' + dateTime
-        };
-
-        if (shotResult) {
-            result = await cloudinaryPromise(shotResult, cloudinary_options)
-            return result.url;
-        } else {
-            return null;
-        }
-
-    } catch (error) {
-        console.log('Screen Capture error: ' + error.message);
-        return error
-    }
-
-}
-function cloudinaryPromise(shotResult, cloudinary_options) {
-    return new Promise(function (res, rej) {
-        cloudinary.v2.uploader.upload_stream(cloudinary_options,
-            function (error, cloudinary_result) {
-                if (error) {
-                    console.error('Upload to cloudinary failed: ', error);
-                    rej(error);
-                }
-                res(cloudinary_result);
-            }
-        ).end(shotResult);
-    });
 }
 module.exports = router;
