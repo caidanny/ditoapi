@@ -35,9 +35,9 @@ router.post('/', checkIfAuthenticated, async (req, res, next) => {
   }
   else {
 
-    var imgUrls = await getImgUrls(refresh_token);
+    //var imgUrls = await getImgUrls(refresh_token);
     const players = mailInfo.players
-    var template = emailTemplate(mailInfo.date, mailInfo.time, mailInfo.stadium, players, imgUrls);
+    var template = emailTemplate(mailInfo.date, mailInfo.time, mailInfo.stadium, players, null);
 
 
     const oauth2Client = new google.auth.OAuth2(

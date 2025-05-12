@@ -1,10 +1,12 @@
 const mailTempalte = (date, time, stadium, players, hotImgUrls = []) => {
     if (!stadium) { stadium = 'DUY TÂN' }
     var hotImg = '';
-    if (hotImgUrls.length > 0) {
-        hotImgUrls.forEach(url => {
-            hotImg = hotImg + '<img style="text-align: center" src="' + url + '"><br>'
-        })
+    if(hotImgUrls) {
+        if (hotImgUrls.length > 0) {
+                hotImgUrls.forEach(url => {
+                    hotImg = hotImg + '<img style="text-align: center" src="' + url + '"><br>'
+                })
+            }
     }
     var pA = '', pB = '', pC = '';
     var totalC = (parseInt(players.plyC.length)> 0) ? parseInt(players.plyC.length) : 0;

@@ -50,7 +50,7 @@ app.use('/oauthCallback', oauthcallback);
 
 app.post('/gks', async (req, res) => {
   try {
-    await (new firebase()).saveGK(req.body && req.body.data)
+    await (new firebase()).saveGK(req.body.data)
     res.status(200).send("OK")
   } catch (err) {
     console.log(err)

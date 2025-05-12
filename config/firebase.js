@@ -32,9 +32,11 @@ class Firebase {
         return this.db.ref('emailInfo')
     }
 
-    saveGK(gks = []) {   
+    saveGK(gks = []) {
         return gks.forEach(item => {
-            this.db.ref('gks/'+ item.uid).set(item.date);
+            if (item.uid && item.date) {
+                this.db.ref('gks/'+ item.uid).set(item.date);
+            }
         })
     }
 
